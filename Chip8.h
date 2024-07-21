@@ -17,14 +17,11 @@
 class Chip8 {
 public:
 
-    Chip8()
-        : randGen(std::chrono::system_clock::now().time_since_epoch().count)) {
-
-        // Initialize RNG
-        randByte = std::uniform_int_distribution<uint8_t>(0,255U);
-    }
+    Chip8();
 
     ~Chip8();
+
+
 
     // 8-BIT REGISTERS
     /* A dedicated location on the cpu for storage. All operations that a CPU does
@@ -157,8 +154,16 @@ public:
     std::uniform_int_distribution<uint8_t> randByte;
 
     void LoadROM(char const* filename);
+    void Cycle();
+
+    // Tables
+    void Table0();
+    void Table8();
+    void TableE();
+    void TableF();
 
     // OP CODES
+    void OP_NULL();
     void OP_00E0();
     void OP_00EE();
     void OP_1nnn();
@@ -193,6 +198,8 @@ public:
     void OP_Fx33();
     void OP_Fx55();
     void OP_Fx65();
+
+
 };
 
 
